@@ -1,0 +1,16 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+  ">
+<table class="lzh-table">
+<tbody>
+<tr><th>执行时间</th><th>检测的任务</th><th>状态</th><th>下载excel</th></tr>
+<tr ng-repeat="check in data">
+  <td>{{check.created_at}}</td>
+  <td>{{check.check_with_takopet_relations.length}}</td>
+  <td>{{getStatus(check.status)}}</td>
+  <td><a href="/checks.xls?token={{token}}&id={{check.id}}">下载</a></td>
+</tr>
+</tbody>
+</table>
+</div>

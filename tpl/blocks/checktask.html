@@ -1,0 +1,65 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+  ">
+
+  <!-- main -->
+  <div class="col">
+    <!-- main header -->
+    <div class="bg-light lter b-b wrapper-md">
+      <div class="row">
+       <!--  <div class="col-sm-6 col-xs-12">
+          <h1 class="m-n font-thin h3 text-black">产品管理</h1>
+          <small class="text-muted">我的产品</small>
+        </div>
+        <div class="col-sm-6 text-right hidden-xs"> -->
+
+          <!--<button class="addProduct">-->
+            <!--添加产品-->
+          <!--</button>-->
+          <!--<div class="inline text-left">-->
+            <!--<div class="m-b-xs">$30,000 <span class="text-muted">revenue</span></div>-->
+            <!--<div ng-init="data2=[ 105,102,106,107,105,104,101,99,98,109,105,100,108,110,105,110,109 ]"-->
+              <!--ui-jq="sparkline"-->
+              <!--ui-options="{{data2}}, {type:'bar', height:20, barWidth:5, barSpacing:1, barColor:'#dce5ec'}"-->
+              <!--class="sparkline inline">loading...-->
+            <!--</div>-->
+          <!--</div>-->
+        </div>
+      </div>
+    </div>
+    <!-- / main header -->
+
+    <div class="registereseach_main">
+      <table class="mk-table-default" style="width: 100%;">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>商品的唯一标示ASIN</th>
+          <th>商品名字</th>
+          <th>商品品牌</th>
+          <th>创建时间</th>
+          <th>查看执行结果2</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="values in data">
+          <td > {{values.id}} </td>
+         <td >{{values.asin}} </td>
+         <td title=' + dates[i].HZXM + '>{{values.alias_name}}</td>
+          <td class="xz-lenght97">{{values.brand}}</td>
+          <td class="xz-lenght97">{{values.created_at | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+          <td ui-sref="layout.taskRelations({index:$index})">查看结果</td>
+         </tr>
+        </tbody>
+      </table>
+     
+    </div>
+    <div class="registereseach_main">
+      </div>
+  <!-- / main -->
+  <!-- right col -->
+
+
+</div>
+</div>

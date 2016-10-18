@@ -1,0 +1,156 @@
+<!-- hbox layout -->
+<!-- <div class="hbox hbox-auto-xs hbox-auto-sm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+  ">
+    <div class="col"> -->
+        <!-- main header -->
+        <!-- <div class="bg-light lter b-b wrapper-md">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <h1 class="m-n font-thin h3 text-black">任务执行结果</h1>
+                    <small class="text-muted">我的任务列表</small>
+                </div>
+                <div class="col-sm-6 text-right hidden-xs">
+                </div>
+            </div>
+        </div>
+        <div class="registereseach_main">
+            <div>
+                <div class="menus_list">
+                    <ul class="nav" ng-repeat="values in data">
+                        <li ng-click="list($index)">{{values.alias_name}}</li>
+                    </ul>
+                </div>
+                <div class="content">
+                    <div class="task">
+                        <div class="first">
+                                <div class="taskid">ID:{{content.id}}</div>
+                                <div class="alias_name">alias_name:{{content.alias_name}}</div>
+                                <div class="brand">品牌名:{{content.brand}}</div>
+                        </div>
+                        <div>
+                            <div  ng-repeat="tasks in  content.tasks" class="second">
+                                <div class="is_registe">是否需要注册用户:{{tasks.is_register?'是':'否'}}</div>
+                                <div class="is_disguise">是否需要伪装:{{tasks.is_disguise?'是':'否'}}</div>
+                                <div class="is_add_cart">是否加入购物车:{{tasks.is_add_cart?'是':'否'}}</div>
+                                <div class="is_add_wishlist">是否加入心愿单:{{tasks.is_add_wishlist?'是':'否'}}</div>
+                                <div class="max_page">搜索最大页数:{{tasks.max_page}}</div>
+                                <div class="start_page">搜索开始页数:{{tasks.start_page}}</div>
+
+
+
+                            </div>
+                        </div>
+                        <div class="seconds"  ng-repeat="tasks in  content.tasks">
+                            <div class="done_times" ng-repeat="relations in tasks.task_operate_relations">执行次数:{{relations.done_times}}</div>
+                        </div>
+                        <div class="third" ng-repeat="tasks in  content.tasks">
+                            <div  ng-repeat="relations in tasks.task_operate_relations">
+                                <div ng-repeat="operates in relations">
+                                    <div class="ranking">排名:{{operates.ranking}}</div>
+                                    <div class="show_page">展示在第几页:{{operates.show_page}}</div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="end">
+                            <div class="created_at">创建时间:{{content.created_at | date:'yyyy-MM-dd HH:mm:ss '}}</div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div> -->
+            <!--<table class="mk-table-default" style="width: 100%;">-->
+                <!--<thead>-->
+                <!--<tr>-->
+                    <!--<th>ID</th>-->
+                    <!--<th>ASIN</th>-->
+                    <!--<th>品牌</th>-->
+                    <!--<th>任务编号</th>-->
+                    <!--<th>是否需要注册用户</th>-->
+                    <!--<th>是否需要伪装</th>-->
+                    <!--<th>是否加入购物车</th>-->
+                    <!--<th>是否加入心愿</th>-->
+                    <!--<th>搜索的最大页数</th>-->
+                    <!--<th>搜索开始页数</th>-->
+                    <!--<th>执行次数</th>-->
+                    <!--<th>排名</th>-->
+                    <!--<th>显示页面</th>-->
+                    <!--<th>执行时间</th>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--<tbody>-->
+                    <!--<tr ng-repeat="values in data">-->
+                        <!--<td>{{values.id}}</td>-->
+                        <!--<td>{{values.asin}}</td>-->
+                        <!--<td>{{values.brand}}</td>-->
+                        <!--<td>{{values.tasks.id}}</td>-->
+                        <!--<td>{{data.is_register }}</td>-->
+                        <!--<td>{{values.tasks.is_disguise }}</td>-->
+                        <!--<td>{{values.tasks.is_add_cart }}</td>-->
+                        <!--<td>{{values.tasks.is_add_wishlist}}</td>-->
+                        <!--<td>{{values.tasks.max_page}}</td>-->
+                        <!--<td>{{values.tasks.start_page}}</td>-->
+                        <!--<td>{{values.task_operate_relations.done_times}}</td>-->
+                        <!--<td>{{values.task_operate_relations.operates.ranking}}</td>-->
+                        <!--<td>{{values.task_operate_relations.operates.show_page}}</td>-->
+                        <!--<td>{{values.created_at }}</td>-->
+                    <!--</tr>-->
+
+
+
+
+                <!--</tbody>-->
+            <!--</table>-->
+            <!--<div class="comeback">-->
+                <!--&lt;!&ndash;<img src="images/count_log_bottom.png" alt="" ng-click="top()" class="top">&ndash;&gt;-->
+                <!--&lt;!&ndash;<img src="images/count_log_bottom.png" alt="" ng-click="bottom()" class="bottom">&ndash;&gt;-->
+            <!--</div>-->
+        <!-- </div> -->
+    <!-- </div> -->
+
+    <div class="lzh-tasklist">
+        <table class="lzh-table">
+           <tbody>
+              <tr><th>商品名称</th><th>ASIN</th><th>关键字</th><th>分类</th><th>是否加入购物车</th><th>是否加入心愿单</th><th>操作次数</th><th>开始页数</th><th>最大页数</th><th>详情</th></tr>
+              <tr ng-repeat="task in content.tasks">
+                  <td>{{content.alias_name}}</td>
+                  <td>{{content.asin}}</td>
+                  <td>{{task.key}}</td>
+                  <td>{{task.category_id}}</td>
+                  <td>{{task.is_add_cart}}</td>
+                  <td>{{task.is_add_wishlist}}</td>
+                  <td>{{task.start_page}}</td>
+                  <td>{{task.operate_times}}</td>
+                  <td>{{task.max_page}}</td>
+                  <td><a href="javascript:void(0)" ng-click="show_detail($index)">详情</a></td>
+              </tr>
+           </tbody>
+        </table>
+    </div>
+
+    <div class="tasklist-detail-box">
+        <span class="close" ng-click="hideBox('tasklist-detail-box')">x</span>
+        <div>
+            <table class="lzh-table">
+                <tbody>
+                    <tr><th>完成次数</th><th>创建时间</th><th>查看</th></tr>
+                    <tr ng-repeat="relation in task_operate_relations"><td>{{relation.done_times}}</td><td>{{relation.created_at}}</td><td><a href="javascript:void(0)" ng-click="show_operate($index)">详情</a></td></tr>
+                </tbody>
+            </table>
+        <div>
+    </div>
+
+    <div class="tasklist-operate-box">
+        <span class="close" ng-click="hideBox('tasklist-operate-box')">x</span>
+        <div>
+            <table class="lzh-table">
+                <tbody>
+                    <tr><th>状态</th><th>排名</th><th>显示页数</th><th>花费时间</th><th>提示</th><th>邮箱</th><th>密码</th><th>ip</th></tr>
+                    <tr ng-repeat="operate in operates"><td class="operate-fail">{{operate.status ==2 ? "成功" : "失败"}}</td><td>{{operate.ranking}}</td><td>{{operate.show_page}}</td><td>{{operate.spend_time}}</td><td>{{operate.remark}}</td><td>{{operate.account ? operate.account.email : ""}}</td><td>{{operate.account ? operate.account.password : ""}}</td><td>{{operate.proxy ? operate.proxy.ip : "" }}</td></tr>
+                </tbody>
+            </table>
+        <div>
+    </div>

@@ -1,0 +1,35 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+  ">
+  <!-- main -->
+  <div class="col">
+    <!-- main header -->
+    <div class="bg-light lter b-b wrapper-md">
+      <div class="row">
+        <div class="col-sm-6 col-xs-12">
+          <h1 class="m-n font-thin h3 text-black">分类管理</h1>
+          <small class="text-muted">添加分类</small>
+        </div>
+        <div class="col-sm-6 text-right hidden-xs">
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="wrapper-md">
+      <p>请填写分类名称</p>
+      <input type="text" placeholder="请填写分类名称" style="width: 100%;height: 50px" ng-model="name">
+
+      <p>请填写分类上级</p>
+      <input type="text" placeholder="请填写分类上级" style="width: 100%;height: 50px" ng-model="parent_id">
+
+
+
+      <button class="other addProduct" ng-click="add()">添加分类</button>
+    </div>
+
+
+  </div>
+</div>

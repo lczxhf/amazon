@@ -1,0 +1,121 @@
+<!-- hbox layout -->
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+  ">
+  <div class="col">
+    <!-- main header -->
+    <div class="bg-light lter b-b wrapper-md">
+      <div class="row">
+        <div class="col-sm-6 col-xs-12">
+          <h1 class="m-n font-thin h3 text-black">任务管理</h1>
+          <small class="text-muted">我的任务</small>
+        </div>
+        <div class="col-sm-6 text-right hidden-xs">
+
+          <!--<button class="addProduct">-->
+            <!--添加产品-->
+            <div ng-show="all=='true'">批量检测</div>
+          <!--</button>-->
+          <div class="uploadbutton">
+            <!--上传批量任务文件-->
+            <div class="addProduct">
+              <form accept-charset="UTF-8" class="J-sandbox" enctype="multipart/form-data" >
+                <input class="parameter"  type="file" name="task[file]" id="image_file" ng-model="app" style="width: 200px;position: absolute;right:97px"/>
+                <!--  <input class="parameter required" minlength="1" name="token" placeholder="(required)" id="mtoken0.23213057644911284" type="text" value="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJsb2dnZWRfYXQiOiIyMDE2LTEwLTA5IDE3OjQ1OjQ3ICswODAwIn0.ZeBWqEY7Qqsq21IXxIrO13mHPmH09QOBZQAmFccYBYg">       -->
+              </form>
+            </div>
+            <button ng-click="clickUpload()" class="uploadfile">确定文件上传</button>
+          </div>
+          <a href="http://45.34.18.226:3000/tasks.xls" class="downloadbutton">批量上传模板下载</a>
+        </div>
+      </div>
+    </div>
+    <div class="registereseach_main">
+    <table class="mk-table-default" style="width: 100%;">
+        <button ng-click="batch_exec()">
+            批量检测
+        </button>
+      <label>全选</label>
+      <thead>
+      <tr>
+         <th></th>
+        <th>商品ID</th>
+        <th>分类ID</th>
+        <th>关键字</th>
+        <th>执行次数</th>
+        <th>是否需要注册用户</th>
+        <th>是否需要伪装</th>
+        <th>是否加入购物车</th>
+        <th>是否加入心愿</th>
+        <th>是否点击广告</th>
+        <th>搜索的最大页数</th>
+        <th>搜索开始页数</th>
+        <th>备注</th>
+        <th>操作</th>
+        <th>查看执行结果</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in dataes">
+            {{item.id}}
+            <img  ng-src="img/check1.png" alt="" class="Allcheckbox"  ng-click="toggleAll()">
+
+            <td ng-click="click_box(item,check_num)" >
+              <img ng-src="{{exists(item,check_num)?'img/check2.png':'img/check1.png'}}" alt="" class="checkbox">
+              <!--<img ng-src="img/check1.png" alt="" class="checkbox" ng-show="!exists(item,check_num)">-->
+          </td>
+          <td >{{item.product.id}}</td>
+          <td >{{ item.category.id}}</td>
+          <td >
+              {{item.key}}
+          </td>
+          <td >{{ item.operate_times }}</td>
+          <td >{{ (item.is_register =='true'?'是':'否') }}</td>
+          <td >{{ (item.is_disguise =='true'?'是':'否') }}</td>
+          <td >{{ (item.is_add_cart =='true'?'是':'否') }}</td>
+          <td >{{ (item.is_add_wishlist =='true'?'是':'否') }}</td>
+          <td>{{  item.is_click_advert ? '是' : '否'}}</td>
+          <td >{{ item.max_page }}</td>
+          <td >{{ item.start_page }}</td>
+          <td >{{ item.remark }}</td>
+          <td  style="color:#00a8f3;cursor:pointer">
+              <span ng-click="execute(item.id)">执行任务</span></br>
+          </td>
+          <td  style="color:#00a8f3;cursor:pointer">
+              <span ng-click="show_detail(item.id)">产看任务</span>
+              </br>
+          </td>
+        <tr>
+      </tbody>
+    </table>
+    <!--<div class="comeback">-->
+      <!--<img src="images/count_log_bottom.png" alt="" ng-click="top()" class="top">-->
+      <!--<img src="images/count_log_bottom.png" alt="" ng-click="bottom()" class="bottom">-->
+    <!--</div>-->
+  </div>
+</div>
+<!-- /hbox layout -->
+<div class="tasklist-detail-box tasklist-bg-yellow">
+    <span class="close" ng-click="hideBox('tasklist-detail-box')">x</span>
+    <div>
+        <table class="lzh-table">
+            <tbody>
+                <tr><th>完成次数</th><th>创建时间</th><th>查看</th></tr>
+                <tr ng-repeat="relation in task_operate_relations"><td>{{relation.done_times}}</td><td>{{relation.created_at}}</td><td><a href="javascript:void(0)" ng-click="show_operate($index)">详情</a></td></tr>
+            </tbody>
+        </table>
+    <div>
+</div>
+
+<div class="tasklist-operate-box">
+    <span class="close" ng-click="hideBox('tasklist-operate-box')">x</span>
+    <div>
+        <table class="lzh-table">
+            <tbody>
+                <tr><th>状态</th><th>排名</th><th>显示页数</th><th>花费时间</th><th>提示</th><th>邮箱</th><th>密码</th><th>ip</th></tr>
+                <tr ng-repeat="operate in operates"><td class="operate-fail">{{operate.status ==2 ? "成功" : "失败"}}</td><td>{{operate.ranking}}</td><td>{{operate.show_page}}</td><td>{{operate.spend_time}}</td><td>{{operate.remark}}</td><td>{{operate.account ? operate.account.email : ""}}</td><td>{{operate.account ? operate.account.password : ""}}</td><td>{{operate.proxy ? operate.proxy.ip : "" }}</td></tr>
+            </tbody>
+        </table>
+    <div>
+</div>

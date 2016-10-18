@@ -1,0 +1,14 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+  ">
+<table class="lzh-table">
+<tbody>
+<tr><th>执行时间</th><th>状态</th></tr>
+<tr ng-repeat="relation in data">
+  <td>{{relation.created_at}}</td>
+  <td>{{getStatus(relation.status)}}</td>
+</tr>
+</tbody>
+</table>
+</div>
