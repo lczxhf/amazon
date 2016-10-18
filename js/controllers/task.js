@@ -315,7 +315,3 @@ app.controller('task', ['$scope','$http','az', '$compile','Request', 'tips','az'
 //        }
 //    }
 //})
-
-
-
-
