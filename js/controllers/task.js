@@ -116,7 +116,7 @@ app.controller('task', ['$scope','$http','az', '$compile','Request', 'tips','az'
     $scope.show_operate = function(index){
       var box = document.getElementsByClassName("tasklist-operate-box")[0]
       box.style.display = "block";
-      box.style.height = document.getElementsByClassName("tasklist-detail-box")[0].clientHeight+"px"
+      // box.style.height = document.getElementsByClassName("tasklist-detail-box")[0].clientHeight+"px"
 
       $scope.operates = $scope.task_operate_relations[index].operates
     }

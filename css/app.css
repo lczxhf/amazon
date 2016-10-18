@@ -5313,6 +5313,8 @@ a.text-#000000:hover {
   padding-top: 5rem;
   padding-right: 5rem;
   padding-bottom: 2rem;
+  overflow: scroll;
+  max-height: 80%;
 }
 .tasklist-bg-yellow{
   background-color: rgb(201, 237, 158);
@@ -5331,6 +5333,8 @@ a.text-#000000:hover {
   padding-top: 5rem;
   padding-right: 5rem;
   padding-bottom: 2rem;
+  overflow: scroll;
+  max-height: 80%;
 }
 .tasklist-operate-box .close{
   position: absolute;
