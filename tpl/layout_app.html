@@ -71,10 +71,10 @@
               {{item.key}}
           </td>
           <td >{{ item.operate_times }}</td>
-          <td >{{ (item.is_register =='true'?'是':'否') }}</td>
-          <td >{{ (item.is_disguise =='true'?'是':'否') }}</td>
-          <td >{{ (item.is_add_cart =='true'?'是':'否') }}</td>
-          <td >{{ (item.is_add_wishlist =='true'?'是':'否') }}</td>
+          <td >{{ (item.is_register ?'是':'否') }}</td>
+          <td >{{ (item.is_disguise ?'是':'否') }}</td>
+          <td >{{ (item.is_add_cart ?'是':'否') }}</td>
+          <td >{{ (item.is_add_wishlist ?'是':'否') }}</td>
           <td>{{  item.is_click_advert ? '是' : '否'}}</td>
           <td >{{ item.max_page }}</td>
           <td >{{ item.start_page }}</td>
