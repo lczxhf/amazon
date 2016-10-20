@@ -5303,6 +5303,7 @@ a.text-#000000:hover {
   height: 2rem;
   border:1px solid #cad9ea;
   padding:0 1em 0;
+  overflow: auto;
 }
 .tasklist-detail-box{
   position: fixed;
