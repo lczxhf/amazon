@@ -33,6 +33,9 @@
     </div>
     <div class="registereseach_main">
     <table class="mk-table-default" style="width: 100%;">
+        <select ng-model="selectModel" ng-change="product_change()">
+            <option ng-repeat="product in products" ng-selected="product_selected == {{product.id}}" value="{{product.id}}">{{product.alias_name}}</option>
+        </select>
         <button ng-click="batch_exec()">
             批量检测
         </button>
@@ -56,8 +59,8 @@
         <th>查看执行结果</th>
       </tr>
       </thead>
-      <tbody>
-        <tr ng-repeat="item in dataes">
+      <tbody class="task-tbody">
+        <tr ng-repeat="item in dataes" class="task-tr">
             {{item.id}}
             <img  ng-src="img/check1.png" alt="" class="Allcheckbox"  ng-click="toggleAll()">
 
@@ -83,7 +86,13 @@
               <span ng-click="execute(item.id)">执行任务</span></br>
           </td>
           <td  style="color:#00a8f3;cursor:pointer">
-              <span ng-click="show_detail(item.id)">产看任务</span>
+              <!-- <span ng-click="show_detail(item.id)">产看任务</span> -->
+              <button ng-click="show_operate_ul($index,$event)" class="btn-operate">操作</button>
+              <ul class="operate-ul">
+                  <li><button ng-click="show_detail(item.id)">查看任务</button></li>
+                  <li><button ng-click="show_edit_box(item.id,$index)">修改任务</button></li>
+                  <li><button ng-click="delete_task(item.id,$index)">删除任务</button></li>
+              </ul>
               </br>
           </td>
         <tr>
@@ -96,19 +105,19 @@
   </div>
 </div>
 <!-- /hbox layout -->
-<div class="tasklist-detail-box tasklist-bg-yellow">
+<div class="flex-box tasklist-detail-box">
     <span class="close" ng-click="hideBox('tasklist-detail-box')">x</span>
     <div>
         <table class="lzh-table">
             <tbody>
-                <tr><th>完成次数</th><th>创建时间</th><th>查看</th></tr>
-                <tr ng-repeat="relation in task_operate_relations"><td>{{relation.done_times}}</td><td>{{relation.created_at}}</td><td><a href="javascript:void(0)" ng-click="show_operate($index)">详情</a></td></tr>
+                <tr><th>执行次数</th><th>完成次数</th><th>创建时间</th><th>查看</th></tr>
+                <tr ng-repeat="relation in task_operate_relations"><td>{{relation.operate_times}}</td><td>{{relation.done_times}}</td><td>{{relation.created_at}}</td><td><a href="javascript:void(0)" ng-click="show_operate($index)">详情</a></td></tr>
             </tbody>
         </table>
-    <div>
+    </div>
 </div>
 
-<div class="tasklist-operate-box">
+<div class="flex-box tasklist-operate-box">
     <span class="close" ng-click="hideBox('tasklist-operate-box')">x</span>
     <div>
         <table class="lzh-table">
@@ -117,5 +126,14 @@
                 <tr ng-repeat="operate in operates"><td class="operate-fail">{{operate.status ==2 ? "成功" : "失败"}}</td><td>{{operate.ranking}}</td><td>{{operate.show_page}}</td><td>{{operate.spend_time}}</td><td>{{operate.remark}}</td><td>{{operate.account ? operate.account.email : ""}}</td><td>{{operate.account ? operate.account.password : ""}}</td><td>{{operate.proxy ? operate.proxy.ip : "" }}</td></tr>
             </tbody>
         </table>
-    <div>
+    </div>
+</div>
+
+<div class="flex-box task-edit">
+  <span class="close" ng-click="hideBox('task-edit')">x</span>
+  <div>
+      <span><label>开始页数:</label><input type="number" id="start_page"/></span>
+      <span><label>操作次数:</label><input type="number" id="operate_times"/></span>
+      <div><button data-id="0" class="btn-edit" data-index="0" ng-click="save_edit()">提交</button></div>
+  </div>
 </div>

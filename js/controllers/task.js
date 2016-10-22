@@ -2,7 +2,14 @@
  * Created by mac on 2016/10/4.
  */
 app.controller('task', ['$scope','$http','az', '$compile','Request', 'tips','az',function($scope,$http,az,$compile,Request,tips,az) {
-
+  if(localStorage.taskList){
+    $scope.dataes = JSON.parse(localStorage.taskList)
+    $scope.itemID = []
+    $scope.product_selected = localStorage.select_product_id
+    for(var i=0;i< $scope.dataes.length;i++){
+        $scope.itemID.push( $scope.dataes[i].id);
+    }
+  }else{
     az.task({
         token:getCookie('token'),
         page:1,
@@ -10,10 +17,21 @@ app.controller('task', ['$scope','$http','az', '$compile','Request', 'tips','az'
     },function(data){
         $scope.dataes = data.data;
         $scope.itemID = [];
+        $scope.product_selected = 0
         for(var i=0;i< data.data.length;i++){
             $scope.itemID.push( data.data[i].id);
         }
     });
+  }
+    az.productList({
+        token:getCookie('token'),
+        page:1,
+        per_page:10000
+    },function(data){
+        $scope.products = data.data
+        $scope.products.unshift({id:0,alias_name:"全部商品"})
+    });
+
     var  check_num = $scope.check_num = [];
     $scope.click_box = function(item,check_num){
         var idx = check_num.indexOf(item.id);
@@ -66,6 +84,119 @@ app.controller('task', ['$scope','$http','az', '$compile','Request', 'tips','az'
         })
     }
 
+    $scope.selectModel = 0
+    $scope.product_change = function(){
+      console.log($scope.selectModel)
+      if($scope.selectModel == 0){
+        localStorage.removeItem("taskList")
+        localStorage.removeItem("select_product_id")
+        window.location.reload()
+      }else{
+        az.taskList_by_product({
+            token:getCookie('token'),
+            id:$scope.selectModel
+        },function(data){
+          if(data.code == '200'){
+            tips.blackTips({
+                text: '请求成功',
+                divTop:50
+            });
+              localStorage.taskList = JSON.stringify(data.data)
+              localStorage.select_product_id = $scope.selectModel
+              window.location.reload()
+          }else{
+              tips.blackTips({
+                  text: '请求失败',
+                  divTop:50
+              });
+          }
+        })
+      }
+    }
+
+    $scope.show_edit_box = function(id,index){
+      document.getElementsByClassName("btn-edit")[0].setAttribute("data-id",id)
+      document.getElementsByClassName("btn-edit")[0].setAttribute("data-index",index)
+      document.getElementsByClassName("task-edit")[0].style.display = "block"
+      document.getElementById("start_page").value = ""
+      document.getElementById("operate_times").value = ""
+    }
+
+    $scope.save_edit = function(){
+      var id = document.getElementsByClassName("btn-edit")[0].getAttribute("data-id")
+      var start_page = document.getElementById("start_page").value
+      var operate_times = document.getElementById("operate_times").value
+      var index = document.getElementsByClassName("btn-edit")[0].getAttribute("data-index")
+      var params =  {}
+      if(start_page> 0){
+        params.start_page = start_page
+      }
+      if(operate_times>0){
+        params.operate_times = operate_times
+      }
+      az.edit_task(Object.assign({
+          token:getCookie('token'),
+          id:id
+      },params),function(data){
+          if(data.code == '200'){
+              document.getElementsByClassName("task-edit")[0].style.display = "none"
+              var tr = document.getElementsByClassName("task-tr")[index]
+              tr.childNodes[9].innerHTML = operate_times
+              tr.childNodes[23].innerHTML = start_page
+              tips.blackTips({
+                  text: '修改成功',
+                  divTop:50
+              });
+          }else{
+              tips.blackTips({
+                  text: '修改失败',
+                  divTop:50
+              });
+          }
+      })
+    }
+
+    $scope.show_operate_ul = function(index,event){
+        var ul = document.getElementsByClassName("operate-ul")[index]
+        if(ul.style.display == "block"){
+          ul.style.display = "none"
+          event.stopPropagation();
+          document.body.removeEventListener("click",$scope.methods_addr)
+        }else{
+          var all_ul = document.getElementsByClassName("operate-ul")
+          for (var i = 0; i < all_ul.length; i++) {
+            all_ul[i].style.display = "none"
+          }
+          ul.style.display = "block"
+          event.stopPropagation();
+          $scope.methods_addr = $scope.show_operate_ul.bind(null,index,event)
+          document.body.addEventListener("click",$scope.methods_addr)
+        }
+
+    }
+
+    $scope.delete_task = function(id,index){
+      if(confirm("是否确定要删除任务")){
+      az.delete_task({
+        token:getCookie('token'),
+        id:id
+      },function(data){
+          if(data.code == '200'){
+              var tr = document.getElementsByClassName("task-tr")[index]
+              tr.parentNode.removeChild(tr)
+              tips.blackTips({
+                  text: '删除成功',
+                  divTop:50
+              });
+          }else{
+              tips.blackTips({
+                  text: '删除失败',
+                  divTop:50
+              });
+          }
+      })
+    }
+  }
     //单个任务 检测
     $scope.check_exec = function(num){
         az.check_exec({
@@ -113,6 +244,7 @@ app.controller('task', ['$scope','$http','az', '$compile','Request', 'tips','az'
     $scope.hideBox = function(name){
       document.getElementsByClassName(name)[0].style.display = "none";
     };
+
     $scope.show_operate = function(index){
       var box = document.getElementsByClassName("tasklist-operate-box")[0]
       box.style.display = "block";
@@ -172,6 +304,7 @@ app.controller('task', ['$scope','$http','az', '$compile','Request', 'tips','az'
     }
 
     $scope.execute = function(data){
+      if(confirm("是否确定要执行任务")){
         az.execute({
             token:getCookie('token'),
             task_id:data
@@ -189,6 +322,7 @@ app.controller('task', ['$scope','$http','az', '$compile','Request', 'tips','az'
                 });
             }
         })
+      }
     }
     //数据重置
     $scope.resert = function(data,msg){ //数据重置

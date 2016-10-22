@@ -173,6 +173,29 @@ angular.module('app').factory('Request', ['$http', '$q', function ($http, $q) {
                 callback(data)
             });
         }
+        var delete_task = function (params, callback) {
+            Request.post("v1/tasks/"+params.id,Object.assign(params,{"_method":"delete"})).then(function (data) {
+                callback(data);
+            }, function (data) {
+                callback(data)
+            });
+        }
+
+        var edit_task = function(params, callback){
+          Request.post("v1/tasks/"+params.id,Object.assign(params,{"_method":"put"})).then(function (data) {
+              callback(data);
+          }, function (data) {
+              callback(data)
+          });
+        }
+
+        var taskList_by_product = function(params, callback){
+          Request.get("/v1/products/"+params.id+"/tasks",params).then(function (data) {
+              callback(data);
+          }, function (data) {
+              callback(data)
+          });
+        }
 
 
         //var modellist = function (params, callback) {
@@ -224,7 +247,10 @@ angular.module('app').factory('Request', ['$http', '$q', function ($http, $q) {
             batch_exec:batch_exec,
             check_exec:check_exec,
             check_list:check_list,
-            tasking:tasking
+            tasking:tasking,
+            delete_task:delete_task,
+            edit_task:edit_task,
+            taskList_by_product:taskList_by_product
 
         }
     }])

@@ -5284,8 +5284,6 @@ a.text-#000000:hover {
 
 
 /*lzh*/
-.lzh-tasklist{
-}
 .lzh-table{
   width: 100%;
   border: solid 1px #000;
@@ -5305,7 +5303,7 @@ a.text-#000000:hover {
   padding:0 1em 0;
   overflow: auto;
 }
-.tasklist-detail-box{
+.flex-box{
   position: fixed;
   display: none;
   background-color: #ffffff;
@@ -5317,15 +5315,15 @@ a.text-#000000:hover {
   overflow: scroll;
   max-height: 80%;
 }
-.tasklist-bg-yellow{
+.tasklist-detail-box{
   background-color: rgb(201, 237, 158);
 }
-.tasklist-detail-box .close{
+.flex-box .close{
   position: absolute;
   right: 2rem;
   top:2rem;
 }
-.tasklist-operate-box{
+/*.tasklist-operate-box{
   position: fixed;
   display: none;
   background-color: rgb(228, 240, 189);
@@ -5336,12 +5334,44 @@ a.text-#000000:hover {
   padding-bottom: 2rem;
   overflow: scroll;
   max-height: 80%;
-}
-.tasklist-operate-box .close{
+}*/
+/*.tasklist-operate-box .close{
   position: absolute;
   right: 2rem;
   top:2rem;
-}
+}*/
 .tasklist-operate-box .operate-fail{
   color:red;
+}
+
+.mk-table-default .btn-operate{
+  line-height: 2rem;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(11, 194, 235, 0.48);
+}
+.mk-table-default ul{
+  position: absolute;
+  list-style: none;
+  padding: 0;
+  height: auto;
+  display: none;
+}
+.mk-table-default ul li{
+  height: auto;
+}
+.mk-table-default ul button{
+  background-color: #ffffff;
+  color:#000000;
+}
+.task-edit{
+  background-color: rgb(95, 166, 185);
+}
+.task-edit input{
+  background-color: rgba(189, 194, 190, 0.39);
+}
+.task-edit > div{
+  text-align: center;
+}
+.task-edit button{
+    margin-top: 1rem;
 }
