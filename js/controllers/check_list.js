@@ -1,6 +1,8 @@
 app.controller('check_list', ['$scope','az','tips',function($scope,az,tips) {
   az.check_list({
-      token:getCookie('token')
+      token:getCookie('token'),
+      page:1,
+      per_page:10000
   },function(data){
       $scope.data = data.data;
       $scope.token = getCookie('token')

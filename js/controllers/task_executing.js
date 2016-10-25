@@ -3,7 +3,9 @@
  */
 app.controller('task_executing', ['$scope','az','tips',function($scope,az,tips) {
   az.tasking({
-      token:getCookie('token')
+      token:getCookie('token'),
+      page:1,
+      per_page:10000
   },function(data){
       $scope.data = data.data;
   });
@@ -20,7 +22,7 @@ app.controller('task_executing', ['$scope','az','tips',function($scope,az,tips) 
         return "未知"
     }
   }
-  
+
     function getCookie(c_name)
     {
         if (document.cookie.length>0)
