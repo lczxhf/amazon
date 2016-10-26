@@ -184,7 +184,7 @@ app.controller('task', ['$scope','$http','az', '$compile','Request', 'tips','az'
       },function(data){
           if(data.code == '200'){
               var tr = document.getElementsByClassName("task-tr")[index]
-              tr.parentNode.removeChild(tr)
+              tr.style.display = "none"
               localStorage.removeItem("taskList")
               tips.blackTips({
                   text: '删除成功',
