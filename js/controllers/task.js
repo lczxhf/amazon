@@ -143,6 +143,7 @@ app.controller('task', ['$scope','$http','az', '$compile','Request', 'tips','az'
               var tr = document.getElementsByClassName("task-tr")[index]
               tr.childNodes[9].innerHTML = operate_times
               tr.childNodes[23].innerHTML = start_page
+              localStorage.removeItem("taskList")
               tips.blackTips({
                   text: '修改成功',
                   divTop:50
@@ -184,6 +185,7 @@ app.controller('task', ['$scope','$http','az', '$compile','Request', 'tips','az'
           if(data.code == '200'){
               var tr = document.getElementsByClassName("task-tr")[index]
               tr.parentNode.removeChild(tr)
+              localStorage.removeItem("taskList")
               tips.blackTips({
                   text: '删除成功',
                   divTop:50
