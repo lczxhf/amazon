@@ -7,7 +7,7 @@ app.controller('check_list', ['$scope','az','tips',function($scope,az,tips) {
       $scope.data = data.data;
       $scope.token = getCookie('token')
   });
-
+  $scope.host = HOST
   $scope.getStatus = function(status){
     switch (status) {
       case 1:

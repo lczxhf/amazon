@@ -23,6 +23,8 @@ app.controller('task', ['$scope','$http','az', '$compile','Request', 'tips','az'
         }
     });
   }
+
+    $scope.host = HOST
     az.productList({
         token:getCookie('token'),
         page:1,

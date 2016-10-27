@@ -9,7 +9,7 @@
   <td>{{check.created_at}}</td>
   <td>{{check.check_with_takopet_relations.length}}</td>
   <td>{{getStatus(check.status)}}</td>
-  <td><a href="http://45.34.18.226:3000/checks.xls?token={{token}}&id={{check.id}}">下载</a></td>
+  <td><a href="http://{{host}}:3000/checks.xls?token={{token}}&id={{check.id}}">下载</a></td>
 </tr>
 </tbody>
 </table>
