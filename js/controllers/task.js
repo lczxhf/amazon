@@ -122,12 +122,14 @@ app.controller('task', ['$scope','$http','az', '$compile','Request', 'tips','az'
       document.getElementsByClassName("task-edit")[0].style.display = "block"
       document.getElementById("start_page").value = ""
       document.getElementById("operate_times").value = ""
+      document.getElementById("max_page").value = ""
     }
 
     $scope.save_edit = function(){
       var id = document.getElementsByClassName("btn-edit")[0].getAttribute("data-id")
       var start_page = document.getElementById("start_page").value
       var operate_times = document.getElementById("operate_times").value
+      var max_page = document.getElementById("max_page").value
       var index = document.getElementsByClassName("btn-edit")[0].getAttribute("data-index")
       var params =  {}
       if(start_page> 0){
@@ -136,6 +138,9 @@ app.controller('task', ['$scope','$http','az', '$compile','Request', 'tips','az'
       if(operate_times>0){
         params.operate_times = operate_times
       }
+      if(max_page>0){
+        params.max_page = max_page
+      }
       az.edit_task(Object.assign({
           token:getCookie('token'),
           id:id
@@ -143,8 +148,12 @@ app.controller('task', ['$scope','$http','az', '$compile','Request', 'tips','az'
           if(data.code == '200'){
               document.getElementsByClassName("task-edit")[0].style.display = "none"
               var tr = document.getElementsByClassName("task-tr")[index]
+              if(operate_times)
               tr.childNodes[9].innerHTML = operate_times
+              if(start_page)
               tr.childNodes[23].innerHTML = start_page
+              if(max_page)
+              tr.childNodes[21].innerHTML = max_page
               localStorage.removeItem("taskList")
               tips.blackTips({
                   text: '修改成功',

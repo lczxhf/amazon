@@ -2,7 +2,7 @@
  * Created by mac on 2016/10/6.
  */
 angular.module('app').factory('Request', ['$http', '$q', function ($http, $q) {
-        window.HOST = "23.228.250.58"
+        window.HOST = "45.34.18.226"
         var apiUrl = 'http://'+HOST+':3000/api/mobile/';
         var get = function (path, params) {
             var deferred = $q.defer();
