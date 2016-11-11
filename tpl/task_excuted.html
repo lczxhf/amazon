@@ -1,0 +1,32 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+  ">
+<table class="lzh-table">
+<tbody>
+<tr><th>执行时间</th><th>分类</th><th>ASIN</th><th>关键字</th><th>预计执行次数</th><th>完成次数</th><th>最近出现的页数</th><th>详情</th></tr>
+<tr ng-repeat="relation in data">
+  <td>{{relation.created_at}}</td>
+  <td>{{relation.task.category.name}}</td>
+  <td>{{relation.task.product.asin}}</td>
+  <td>{{relation.task.key}}</td>
+  <td>{{relation.task.operate_times}}</td>
+  <td>{{relation.done_times}}</td>
+  <td>{{get_page(relation)}}</td>
+  <td><span ng-click="show_detail($index)">查看</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="flex-box tasklist-operate-box">
+    <span class="close" ng-click="hideBox('tasklist-operate-box')">x</span>
+    <div>
+        <table class="lzh-table">
+            <tbody>
+                <tr><th>状态</th><th>排名</th><th>显示页数</th><th>花费时间</th><th>提示</th><th>邮箱</th><th>密码</th><th>ip</th></tr>
+                <tr ng-repeat="operate in operates"><td class="operate-fail">{{operate.status ==2 ? "成功" : "失败"}}</td><td>{{operate.ranking}}</td><td>{{operate.show_page}}</td><td>{{operate.spend_time}}</td><td>{{operate.remark}}</td><td>{{operate.account ? operate.account.email : ""}}</td><td>{{operate.account ? operate.account.password : ""}}</td><td>{{operate.proxy ? operate.proxy.ip : "" }}</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>

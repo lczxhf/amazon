@@ -435,6 +435,11 @@ angular.module('app')
                 templateUrl: 'tpl/task_executing.html',
                 controller:'task_executing'
               })
+              .state('layout.task_excuted',{
+                url: '/task_excuted',
+                templateUrl: 'tpl/task_excuted.html',
+                controller:'task_excuted'
+              })
               .state('layout.checktask', {
                   url: '/checktask',
                   templateUrl: 'tpl/checktask.html',

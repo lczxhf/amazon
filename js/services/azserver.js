@@ -191,7 +191,15 @@ angular.module('app').factory('Request', ['$http', '$q', function ($http, $q) {
         }
 
         var taskList_by_product = function(params, callback){
-          Request.get("/v1/products/"+params.id+"/tasks",params).then(function (data) {
+          Request.get("v1/products/"+params.id+"/tasks",params).then(function (data) {
+              callback(data);
+          }, function (data) {
+              callback(data)
+          });
+        }
+
+        var task_excuted = function(params, callback){
+          Request.get("v1/task_operate_relations/executed",params).then(function (data) {
               callback(data);
           }, function (data) {
               callback(data)
@@ -251,7 +259,8 @@ angular.module('app').factory('Request', ['$http', '$q', function ($http, $q) {
             tasking:tasking,
             delete_task:delete_task,
             edit_task:edit_task,
-            taskList_by_product:taskList_by_product
+            taskList_by_product:taskList_by_product,
+            task_excuted:task_excuted
 
         }
     }])
