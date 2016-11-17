@@ -206,7 +206,36 @@ angular.module('app').factory('Request', ['$http', '$q', function ($http, $q) {
           });
         }
 
+        var batch_remove = function(params,callback){
+          Request.post("v1/tasks/batch_delete", params).then(function (data) {
+              callback(data);
+          }, function (data) {
+              callback(data)
+          });
+        }
 
+        var batch_operate = function(params,callback){
+          Request.post("v1/tasks/batch_exec", params).then(function (data) {
+              callback(data);
+          }, function (data) {
+              callback(data)
+          });
+        }
+
+        var remove_product = function(params,callback){
+          Request.post("v1/products/"+params.id, Object.assign(params,{"_method":"delete"})).then(function (data) {
+              callback(data);
+          }, function (data) {
+              callback(data)
+          });
+        }
+        var remove_category = function(params,callback){
+          Request.post("v1/categories/"+params.id, Object.assign(params,{"_method":"delete"})).then(function (data) {
+              callback(data);
+          }, function (data) {
+              callback(data)
+          });
+        }
         //var modellist = function (params, callback) {
         //    Request.post("admin/api/model.php", params).then(function (data) {
         //        callback(data);
@@ -260,7 +289,11 @@ angular.module('app').factory('Request', ['$http', '$q', function ($http, $q) {
             delete_task:delete_task,
             edit_task:edit_task,
             taskList_by_product:taskList_by_product,
-            task_excuted:task_excuted
+            task_excuted:task_excuted,
+            batch_remove:batch_remove,
+            batch_operate:batch_operate,
+            remove_product:remove_product,
+            remove_category:remove_category
 
         }
     }])

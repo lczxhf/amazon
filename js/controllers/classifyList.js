@@ -1,7 +1,7 @@
 /**
  * Created by mac on 2016/10/4.
  */
-app.controller('classfyList', ['$scope','$http','az', '$compile', function($scope,$http,az,$compile) {
+app.controller('classfyList', ['$scope','$http','az', 'tips','$compile', function($scope,$http,az,tips,$compile) {
     az.categories({
         token:getCookie('token'),
         page:1,
@@ -12,11 +12,12 @@ app.controller('classfyList', ['$scope','$http','az', '$compile', function($scop
         console.log(dates);
         if(dates!=undefined){
             for (var i = 0; i < dates.length; i++) {
-                var ul = '<tr>';
+                var ul = '<tr class="z-sub-category">';
                 var li1 = '<td >'+dates[i].name+'</td>';
                 var li2 = '<td >' + dates[i].id +'</td>';
+                var li3 = '<td ><button ng-click="remove_category('+dates[i].id+','+i+')">删除</button></td>';
                 var ulend = "</tr>"
-                str = ul + li1 + li2  + ulend;
+                str = ul + li1 + li2 + li3 + ulend;
                 $(".registereseach_main table tbody").append($compile(str)($scope));
 
 
@@ -49,6 +50,29 @@ app.controller('classfyList', ['$scope','$http','az', '$compile', function($scop
             }
         }
         return ""
+    }
+
+    $scope.remove_category = function(id,index){
+      if(confirm("是否删除任务")){
+        az.remove_category({
+            token:getCookie('token'),
+            id:id
+        },function(data){
+            if(data.code == '200'){
+              var category = document.getElementsByClassName("z-sub-category")[index]
+              category.parentNode.removeChild(category)
+                tips.blackTips({
+                    text: '删除成功',
+                    divTop:50
+                });
+            }else{
+                tips.blackTips({
+                    text: '删除失败',
+                    divTop:50
+                });
+            }
+        })
+      }
     }
 
     //数据重置

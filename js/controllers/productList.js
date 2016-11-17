@@ -1,7 +1,7 @@
 /**
  * Created by mac on 2016/10/4.
  */
-app.controller('productList', ['$scope','$http','az', '$compile',function($scope,$http,az,$compile) {
+app.controller('productList', ['$scope','$http','az','tips', '$compile',function($scope,$http,az,tips,$compile) {
         az.productList({
             token:getCookie('token'),
             page:1,
@@ -14,6 +14,31 @@ app.controller('productList', ['$scope','$http','az', '$compile',function($scope
             //
             // }
         });
+
+
+        $scope.remove_product = function(id,index){
+          if(confirm("是否删除任务")){
+            az.remove_product({
+                token:getCookie('token'),
+                id:id
+            },function(data){
+                if(data.code == '200'){
+                    var product = document.getElementsByClassName("z-sub-product")[index]
+                    product.parentNode.removeChild(product)
+                    tips.blackTips({
+                        text: '删除成功',
+                        divTop:50
+                    });
+                }else{
+                    tips.blackTips({
+                        text: '删除失败',
+                        divTop:50
+                    });
+                }
+            })
+          }
+        }
+
     function getCookie(c_name)
     {
         if (document.cookie.length>0)

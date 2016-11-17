@@ -39,10 +39,17 @@
         <button ng-click="batch_exec()">
             批量检测
         </button>
+        <button ng-click="batch_operate()">
+            批量执行
+        </button>
+        <button ng-click="batch_remove()">
+            批量删除
+        </button>
       <label>全选</label>
       <thead>
       <tr>
          <th></th>
+         <th>asin</th>
         <th>商品ID</th>
         <th>分类ID</th>
         <th>关键字</th>
@@ -68,6 +75,7 @@
               <img ng-src="{{exists(item,check_num)?'img/check2.png':'img/check1.png'}}" alt="" class="checkbox">
               <!--<img ng-src="img/check1.png" alt="" class="checkbox" ng-show="!exists(item,check_num)">-->
           </td>
+          <td> {{item.product.asin}}</td>
           <td >{{item.product.id}}</td>
           <td >{{ item.category.id}}</td>
           <td >

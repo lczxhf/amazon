@@ -68,22 +68,67 @@ app.controller('task', ['$scope','$http','az', '$compile','Request', 'tips','az'
 
     //批量任务检测
     $scope.batch_exec = function(){
-        az.batch_exec({
+      console.log($scope.check_num)
+      // if(confirm('是否批量检测任务')){
+      //   az.batch_exec({
+      //       token:getCookie('token'),
+      //       task_ids:$scope.check_num
+      //   },function(data){
+      //       if(data.code == '200'){
+      //           tips.blackTips({
+      //               text: '任务批量检测成功',
+      //               divTop:50
+      //           });
+      //       }else{
+      //           tips.blackTips({
+      //               text: '任务批量检测失败',
+      //               divTop:50
+      //           });
+      //       }
+      //   })
+      // }
+    }
+
+    $scope.batch_remove = function(){
+      if(confirm("是否批量删除任务")){
+        az.batch_remove({
             token:getCookie('token'),
             task_ids:$scope.check_num
         },function(data){
             if(data.code == '200'){
                 tips.blackTips({
-                    text: '任务批量检测成功',
+                    text: '任务批量删除成功',
                     divTop:50
                 });
             }else{
                 tips.blackTips({
-                    text: '任务批量检测失败',
+                    text: '任务批量删除失败',
                     divTop:50
                 });
             }
         })
+      }
+    }
+
+    $scope.batch_operate = function(){
+      if(confirm("是否批量执行任务")){
+        az.batch_operate({
+            token:getCookie('token'),
+            task_ids:$scope.check_num
+        },function(data){
+            if(data.code == '200'){
+                tips.blackTips({
+                    text: '任务批量执行成功',
+                    divTop:50
+                });
+            }else{
+                tips.blackTips({
+                    text: '任务批量执行失败',
+                    divTop:50
+                });
+            }
+        })
+      }
     }
 
     $scope.selectModel = 0

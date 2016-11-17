@@ -36,20 +36,22 @@
         <tr>
           <th>ID</th>
           <th>商品的唯一标示ASIN</th>
+          <th>链接</th>
           <th>商品名字</th>
           <th>商品品牌</th>
           <th>创建时间</th>
-          <th>查看执行结果2</th>
+          <th>操作</th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="values in data">
+        <tr ng-repeat="values in data" class="z-sub-product">
           <td > {{values.id}} </td>
          <td >{{values.asin}} </td>
+         <td><a href="https://amazon.com/dp/{{values.asin}}" target="_blank">跳转</a></td>
          <td title=' + dates[i].HZXM + '>{{values.alias_name}}</td>
           <td class="xz-lenght97">{{values.brand}}</td>
           <td class="xz-lenght97">{{values.created_at | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-          <td ui-sref="layout.taskRelations({index:$index})">查看结果</td>
+          <td ><button ng-click="remove_product({{values.id}},{{$index}})">删除</button></td>
          </tr>
         </tbody>
       </table>
