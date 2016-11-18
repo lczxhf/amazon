@@ -192,12 +192,13 @@ app.controller('task', ['$scope','$http','az', '$compile','Request', 'tips','az'
           if(data.code == '200'){
               document.getElementsByClassName("task-edit")[0].style.display = "none"
               var tr = document.getElementsByClassName("task-tr")[index]
+              console.log(tr.childNodes)
               if(operate_times)
-              tr.childNodes[9].innerHTML = operate_times
+              tr.childNodes[11].innerHTML = operate_times
               if(start_page)
-              tr.childNodes[23].innerHTML = start_page
+              tr.childNodes[25].innerHTML = start_page
               if(max_page)
-              tr.childNodes[21].innerHTML = max_page
+              tr.childNodes[23].innerHTML = max_page
               localStorage.removeItem("taskList")
               tips.blackTips({
                   text: '修改成功',
