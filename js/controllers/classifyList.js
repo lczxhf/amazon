@@ -15,9 +15,10 @@ app.controller('classfyList', ['$scope','$http','az', 'tips','$compile', functio
                 var ul = '<tr class="z-sub-category">';
                 var li1 = '<td >'+dates[i].name+'</td>';
                 var li2 = '<td >' + dates[i].id +'</td>';
-                var li3 = '<td ><button ng-click="remove_category('+dates[i].id+','+i+')">删除</button></td>';
+                var li3 = '<td >' + dates[i].parent_id +'</td>';
+                var li4 = '<td ><button ng-click="remove_category('+dates[i].id+','+i+')">删除</button></td>';
                 var ulend = "</tr>"
-                str = ul + li1 + li2 + li3 + ulend;
+                str = ul + li1 + li2 + li3 + li4 + ulend;
                 $(".registereseach_main table tbody").append($compile(str)($scope));
 
 

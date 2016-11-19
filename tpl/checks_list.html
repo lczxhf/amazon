@@ -4,9 +4,10 @@
   ">
 <table class="lzh-table">
 <tbody>
-<tr><th>执行时间</th><th>预计检测的任务</th><th>当前完成的任务</th><th>状态</th><th>下载excel</th></tr>
+<tr><th>执行时间</th><th>商品名</th><th>预计检测的任务</th><th>当前完成的任务</th><th>状态</th><th>下载excel</th></tr>
 <tr ng-repeat="check in data">
   <td>{{check.created_at}}</td>
+  <td>{{check.check_with_takopet_relations[0].task_operate_relation.task.product.alias_name}}</td>
   <td>{{check.check_with_takopet_relations.length}}</td>
   <td>{{check.done_time}}</td>
   <td>{{getStatus(check.status)}}</td>
