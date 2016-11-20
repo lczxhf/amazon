@@ -95,6 +95,7 @@ app.controller('task', ['$scope','$http','az', '$compile','Request', 'tips','az'
             task_ids:$scope.check_num
         },function(data){
             if(data.code == '200'){
+              localStorage.removeItem("taskList")
                 tips.blackTips({
                     text: '任务批量删除成功',
                     divTop:50
@@ -190,6 +191,7 @@ app.controller('task', ['$scope','$http','az', '$compile','Request', 'tips','az'
           id:id
       },params),function(data){
           if(data.code == '200'){
+            localStorage.removeItem("taskList")
               document.getElementsByClassName("task-edit")[0].style.display = "none"
               var tr = document.getElementsByClassName("task-tr")[index]
               console.log(tr.childNodes)
