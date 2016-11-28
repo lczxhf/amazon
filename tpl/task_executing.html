@@ -4,9 +4,10 @@
   ">
 <table class="lzh-table">
 <tbody>
-<tr><th>执行时间</th><th>关键字</th><th>预计执行次数</th><th>当前完成次数</th><th>状态</th></tr>
+<tr><th>执行时间</th><th>产品名</th><th>关键字</th><th>预计执行次数</th><th>当前完成次数</th><th>状态</th></tr>
 <tr ng-repeat="relation in data">
   <td>{{relation.created_at}}</td>
+  <td>{{relation.task.product.alias_name}}</td>
   <td>{{relation.task.key}}</td>
   <td>{{relation.task.operate_times}}</td>
   <td>{{relation.operates.length}}</td>
